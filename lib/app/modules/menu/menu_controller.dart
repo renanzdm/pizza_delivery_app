@@ -35,7 +35,7 @@ class MenuController extends GetxController {
   }
 
   Future<void> goToShoppingCart() async {
-    Get.put(ShoppingCartController());
+    Get.put(ShoppingCartController(_flavorsSelected));
     await showBarModalBottomSheet(
       isDismissible: false,
       context: Get.context,
