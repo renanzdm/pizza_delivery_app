@@ -1,4 +1,3 @@
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pizza_delivery_app/app/components/bottom_navigation.dart';
@@ -8,6 +7,7 @@ import 'home_controller.dart';
 
 class HomePage extends GetView<HomeController> {
   static const String ROUTE_PAGE = '/home';
+  static const int NAVIGATION_BAR_INDEX = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +15,7 @@ class HomePage extends GetView<HomeController> {
       appBar: AppBar(
         title: Text('HomePage'),
       ),
-      bottomNavigationBar: BottomNavigationCustom(),
+      bottomNavigationBar: BottomNavigationCustom(NAVIGATION_BAR_INDEX),
       body: LayoutBuilder(builder: (_, constraints) {
         return Container(
           height: constraints.maxHeight,

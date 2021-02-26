@@ -4,6 +4,8 @@ import 'package:pizza_delivery_app/app/modules/home/home_bindings.dart';
 import 'package:pizza_delivery_app/app/modules/home/home_page.dart';
 import 'package:pizza_delivery_app/app/modules/login/login_bindings.dart';
 import 'package:pizza_delivery_app/app/modules/login/login_page.dart';
+import 'package:pizza_delivery_app/app/modules/orders/orders_bindings.dart';
+import 'package:pizza_delivery_app/app/modules/orders/orders_page.dart';
 import 'package:pizza_delivery_app/app/modules/register/register_bindings.dart';
 import 'package:pizza_delivery_app/app/modules/register/register_page.dart';
 import 'package:pizza_delivery_app/app/modules/splash/splash_bindings.dart';
@@ -34,6 +36,11 @@ class UiConfig {
       name: RegisterPage.ROUTE_PAGE,
       page: () => RegisterPage(),
       binding: RegisterBindings(),
+    ),
+    GetPage(
+      name: OrdersPage.ROUTE_PAGE,
+      page: () => OrdersPage(),
+      binding: OrdersBindings(),
     ),
   ];
 }
