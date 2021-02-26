@@ -5,11 +5,14 @@ import 'package:pizza_delivery_app/app/helpers/loader_mixin.dart';
 import 'package:pizza_delivery_app/app/helpers/messages_mixin.dart';
 import 'package:pizza_delivery_app/app/models/menu_item_model.dart';
 import 'package:pizza_delivery_app/app/models/user_model.dart';
+import 'package:pizza_delivery_app/app/repositories/order_repository.dart';
+import 'package:pizza_delivery_app/app/view_models/checkout_input_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class ShoppingCartController extends GetxController
     with MessagesMixin, Loadermixin {
-  ShoppingCartController(this.flavorsSelected);
+  ShoppingCartController(this.flavorsSelected, this._repository);
+  final OrderRepository _repository;
   final RxList<MenuItemModel> flavorsSelected;
   final _user = Rx<UserModel>();
   final _address = ''.obs;
@@ -69,8 +72,8 @@ class ShoppingCartController extends GetxController
       content: Container(
         child: RadioButtonGroup(
           labels: [
-            'Cartao de credito',
-            'Cartao de debito',
+            'Cartao de Credito',
+            'Cartao de Debito',
             'Dinheiro',
           ],
           onSelected: (String value) => _paymentType.value = value,
@@ -104,21 +107,26 @@ class ShoppingCartController extends GetxController
           'Erro', 'Forma de pagamento obrigatorio', MessageType.error);
     } else {
       _loading.value = true;
-      String paymentTypeBackEnd = '';
-      switch (paymentType) {
-        case 'Cartao de Credito':
-          paymentTypeBackEnd = 'credito';
+      await _repository.saverOrders(
+        CheckoutInputModel(
+          userId: 1,
+          address: address,
+          paymentType: paymentType,
+          itemsId: flavorsSelected.map<int>((element) => element.id).toList(),
+        ),
+      );
+      try {
+        _loading.value = false;
+        _message.value = MessageModel(
+            'Sucesso', 'Pedido Realizado com Sucesso', MessageType.info);
+        await 1.seconds.delay();
+        Get.close(3);
+      } catch (e) {
+        print(e.toString());
+        _loading.value = false;
 
-          break;
-        case 'Cartao de Debito':
-          paymentTypeBackEnd = 'debito';
-
-          break;
-        case 'Dinheiro':
-          paymentTypeBackEnd = 'dinheiro';
-
-          break;
-        default:
+        _message.value =
+            MessageModel('Erro', 'Forma ao fazer pedido', MessageType.error);
       }
     }
   }

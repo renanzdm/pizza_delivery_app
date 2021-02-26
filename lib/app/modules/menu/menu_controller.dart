@@ -6,6 +6,7 @@ import 'package:pizza_delivery_app/app/models/menu_model.dart';
 import 'package:pizza_delivery_app/app/modules/shoppingCart/shopping_cart_controller.dart';
 import 'package:pizza_delivery_app/app/modules/shoppingCart/shopping_cart_page.dart';
 import 'package:pizza_delivery_app/app/repositories/menu_repository.dart';
+import 'package:pizza_delivery_app/app/repositories/order_repository.dart';
 
 class MenuController extends GetxController {
   MenuController(this._repository);
@@ -35,7 +36,8 @@ class MenuController extends GetxController {
   }
 
   Future<void> goToShoppingCart() async {
-    Get.put(ShoppingCartController(_flavorsSelected));
+    Get.put(OrderRepository(Get.find()));
+    Get.put(ShoppingCartController(_flavorsSelected, Get.find()));
     await showBarModalBottomSheet(
       isDismissible: false,
       context: Get.context,
@@ -43,6 +45,7 @@ class MenuController extends GetxController {
         return ShoppingCartPage();
       },
     );
+    Get.delete<OrderRepository>();
     Get.delete<ShoppingCartController>();
   }
 }
