@@ -1,7 +1,5 @@
-import 'dart:developer';
-
+import 'package:get/get.dart';
 import 'package:pizza_delivery_app/app/helpers/rest_client.dart';
-import 'package:pizza_delivery_app/app/models/order_item_model.dart';
 import 'package:pizza_delivery_app/app/models/order_model.dart';
 import 'package:pizza_delivery_app/app/view_models/checkout_input_model.dart';
 
@@ -11,12 +9,12 @@ class OrderRepository {
   OrderRepository(this._restClient);
 
   Future<List<OrderModel>> findMyOrders(int userId) async {
-    final response =
+    final Response<List<OrderModel>> response =
         await _restClient.get('/order/user/$userId', decoder: (resp) {
       if (resp is List) {
         return resp.map<OrderModel>((e) => OrderModel.fromMap(e)).toList();
       }
-      return null;
+      return [];
     });
 
     if (response.hasError) {
@@ -45,7 +43,7 @@ class OrderRepository {
     final response = await _restClient.post('/order/', model.toMap());
 
     if (response.hasError) {
-      print("erro ${response.statusText}");
+      print("erro ${response.body}");
       throw RestClientException('Erro ao registrar order');
     }
   }

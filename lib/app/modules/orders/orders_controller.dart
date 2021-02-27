@@ -22,6 +22,8 @@ class OrdersController extends GetxController with StateMixin {
       final orders = await _repository.findMyOrders(_user.id);
       change(orders, status: RxStatus.success());
     } catch (e) {
+      print(e.toString());
+
       change('Erro ao buscar pedidos,', status: RxStatus.error());
     }
   }

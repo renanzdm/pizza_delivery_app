@@ -40,7 +40,7 @@ class RegisterController extends GetxController
         'Usuario cadastrado com sucesso',
         MessageType.info,
       );
-      await 1.seconds.delay();
+      await 2.seconds.delay();
       Get.close(2);
     } on RestClientException catch (e) {
       print(e.message);

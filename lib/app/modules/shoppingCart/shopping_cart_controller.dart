@@ -109,7 +109,7 @@ class ShoppingCartController extends GetxController
       _loading.value = true;
       await _repository.saverOrders(
         CheckoutInputModel(
-          userId: 1,
+          userId: _user.value.id,
           address: address,
           paymentType: paymentType,
           itemsId: flavorsSelected.map<int>((element) => element.id).toList(),

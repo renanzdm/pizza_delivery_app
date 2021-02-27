@@ -66,7 +66,7 @@ class ShoppingCartPage extends GetView<ShoppingCartController> {
                     buttonColor: Get.theme.primaryColor,
                     labelColor: Colors.white,
                     labelSize: 18,
-                    onPressed: () => controller.checkout(),
+                    onPressed: () async => await controller.checkout(),
                   ),
                   SizedBox(
                     height: 20,

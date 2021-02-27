@@ -35,7 +35,8 @@ class UserRepository {
       },
     );
     if (response.hasError) {
-      throw RestClientException('Erro ao registrar usuario');
+      print(response.body);
+      throw RestClientException(response.body['message']);
     }
   }
 }

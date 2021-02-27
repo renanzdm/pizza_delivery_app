@@ -1,7 +1,7 @@
 import 'package:get/get.dart';
 
 class RestClient extends GetConnect {
-  String baseUrl = 'http://172.18.0.1:8080';
+  String baseUrl = 'https://api-pizza-delivery.herokuapp.com';
 
   RestClient() {
     httpClient.baseUrl = baseUrl;

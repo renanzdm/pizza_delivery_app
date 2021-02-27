@@ -21,14 +21,18 @@ class RegisterPage extends GetView<RegisterController> {
       body: SafeArea(
         child: LayoutBuilder(builder: (_, constrainsts) {
           return SizedBox(
-            width: constrainsts.maxWidth,
+            height: constrainsts.maxHeight,
             child: SingleChildScrollView(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
+                  SizedBox(
+                    height: 12,
+                  ),
                   Image.asset(
                     'assets/images/logo.png',
-                    width: 250,
+                    //width: 250,
+                    height: constrainsts.maxHeight * .35,
                   ),
                   Container(
                     padding: const EdgeInsets.all(8.0),
@@ -97,7 +101,7 @@ class RegisterPage extends GetView<RegisterController> {
                             );
                           }),
                           SizedBox(
-                            height: 20,
+                            height: 12,
                           ),
                           ButtonCustom(
                               height: 50,
@@ -115,7 +119,7 @@ class RegisterPage extends GetView<RegisterController> {
                                 }
                               }),
                           SizedBox(
-                            height: 20,
+                            height: 12,
                           ),
                           ButtonCustom(
                             height: 50,

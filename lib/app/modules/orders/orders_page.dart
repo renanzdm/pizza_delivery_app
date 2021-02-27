@@ -17,37 +17,39 @@ class OrdersPage extends GetView<OrdersController> {
       appBar: AppBar(
         title: Text('OrdersPage'),
       ),
-      body: LayoutBuilder(builder: (context, constraints) {
-        return RefreshIndicator(
-          onRefresh: () async {
-            await controller.findOrders();
-          },
-          child: ListView(
-            children: [
-              SizedBox(
-                height: constraints.maxHeight,
-                child: controller.obx(
-                  (state) {
-                    return _makeOrder(state);
-                  },
-                  onError: (_) {
-                    return Center(
-                      child: Text('Erro ao buscar pedidos'),
-                    );
-                  },
+      body: LayoutBuilder(
+        builder: (context, constraints) {
+          return RefreshIndicator(
+            onRefresh: () async {
+              await controller.findOrders();
+            },
+            child: ListView(
+              children: [
+                SizedBox(
+                  height: constraints.maxHeight,
+                  child: controller.obx(
+                    (orders) {
+                      return _makeOrder(orders);
+                    },
+                    onError: (_) {
+                      return Center(
+                        child: Text('Erro ao buscar pedidos'),
+                      );
+                    },
+                  ),
                 ),
-              ),
-            ],
-          ),
-        );
-      }),
+              ],
+            ),
+          );
+        },
+      ),
     );
   }
 
   Visibility _makeOrder(List<OrderModel> orders) {
     print(orders.length);
     return Visibility(
-        visible: orders.length > 0,
+        visible: orders.length != 0,
         replacement: Container(
           padding: EdgeInsets.all(10),
           child: Text(

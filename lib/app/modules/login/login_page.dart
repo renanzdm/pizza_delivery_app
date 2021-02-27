@@ -25,6 +25,9 @@ class LoginPage extends GetView<LoginController> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
+                  SizedBox(
+                    height: 20,
+                  ),
                   Image.asset(
                     'assets/images/logo.png',
                     width: 250,
@@ -81,14 +84,14 @@ class LoginPage extends GetView<LoginController> {
                                 }
                               }),
                           SizedBox(
-                            height: 60,
+                            height: 30,
                           ),
                           TextButton(
                             onPressed: () {
                               Get.toNamed(RegisterPage.ROUTE_PAGE);
                             },
                             child: Text(
-                              'Cadastra-se',
+                              'Cadastre-se',
                               style:
                                   TextStyle(color: Colors.black, fontSize: 20),
                             ),
